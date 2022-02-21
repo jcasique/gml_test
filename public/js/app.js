@@ -5557,115 +5557,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/usuario-index.js":
-/*!***************************************!*\
-  !*** ./resources/js/usuario-index.js ***!
-  \***************************************/
-/***/ (() => {
-
-$(function () {
-  'use strict';
-
-  $('.usuario-list-table').DataTable({
-    columnDefs: [{
-      // Actions
-      targets: -1,
-      width: '15%',
-      orderable: false,
-      render: function render(data, type, full, meta) {
-        var $id = full[0];
-        return '<a class="btn btn-sm"><span><i class="bx bx-edit-alt"></i>Editar</span></a>' + '<a class="btn btn-sm"><span><i class="bx bx-trash"></i>Eliminar</span></a>';
-      }
-    }],
-    order: [[2, 'desc']],
-    dom: '<"d-flex justify-content-between align-items-center header-actions mx-1 row mt-75"' + '<"col-lg-12 col-xl-3" l>' + '<"col-lg-12 col-xl-9 pl-xl-75 pl-0"<"dt-action-buttons text-xl-right text-lg-left text-md-right text-left d-flex align-items-center justify-content-lg-end align-items-center flex-sm-nowrap flex-wrap mr-1"<"mr-1"f>B>>' + '>t' + '<"d-flex justify-content-between mx-2 row mb-1"' + '<"col-sm-12 col-md-6"i>' + '<"col-sm-12 col-md-6"p>' + '>',
-    // Buttons with Dropdown
-    buttons: [{
-      text: 'Agregar Área',
-      className: 'add-new btn btn-primary mt-50',
-      attr: {
-        'data-toggle': 'modal',
-        'data-target': '#modals-slide-in'
-      },
-      init: function init(api, node, config) {
-        $(node).removeClass('btn-secondary');
-      }
-    }, {
-      extend: 'excel',
-      text: "Exportar Excel",
-      className: 'add-new btn btn-secondary mt-50',
-      exportOptions: {
-        columns: [0, 1, 2, 3, 4]
-      }
-    }],
-    // For responsive popup
-    responsive: {
-      details: {
-        display: $.fn.dataTable.Responsive.display.modal({
-          header: function header(row) {
-            var data = row.data();
-            return 'Details of ' + data['full_name'];
-          }
-        }),
-        type: 'column',
-        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-          tableClass: 'table',
-          columnDefs: [{
-            targets: 2,
-            visible: false
-          }, {
-            targets: 3,
-            visible: false
-          }]
-        })
-      }
-    },
-    language: {
-      "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-      paginate: {
-        // remove previous & next text from pagination
-        previous: '&nbsp;',
-        next: '&nbsp;'
-      }
-    },
-    initComplete: function initComplete() {
-      // Adding plan filter once table initialized
-      this.api().columns(2).every(function () {
-        var column = this;
-        var select = $('<select id="regionFilter" class="form-control text-capitalize mb-md-0 mb-2"><option value="">Seleccione para filtrar</option></select>').appendTo('.region').on('change', function () {
-          var val = $.fn.dataTable.util.escapeRegex($(this).val());
-          column.search(val ? '^' + val + '$' : '', true, false).draw();
-        });
-        column.data().unique().sort().each(function (d, j) {
-          select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
-        });
-      });
-      this.api().columns(3).every(function () {
-        var column = this;
-        var select = $('<select id="divisionFilter" class="form-control text-capitalize mb-md-0 mb-2"><option value="">Seleccione para filtrar</option></select>').appendTo('.division').on('change', function () {
-          var val = $.fn.dataTable.util.escapeRegex($(this).val());
-          column.search(val ? '^' + val + '$' : '', true, false).draw();
-        });
-        column.data().unique().sort().each(function (d, j) {
-          select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
-        });
-      });
-      this.api().columns(4).every(function () {
-        var column = this;
-        var select = $('<select id="statusFilter" class="form-control text-capitalize mb-md-0 mb-2"><option value="">Seleccione para filtrar</option></select>').appendTo('.status').on('change', function () {
-          var val = $.fn.dataTable.util.escapeRegex($(this).val());
-          column.search(val ? '^' + val + '$' : '', true, false).draw();
-        });
-        column.data().unique().sort().each(function (d, j) {
-          select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
-        });
-      });
-    }
-  });
-});
-
-/***/ }),
-
 /***/ "./node_modules/lodash/lodash.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
@@ -23270,7 +23161,6 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/usuario-index.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
